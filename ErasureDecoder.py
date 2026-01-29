@@ -126,10 +126,8 @@ class LT_Erasure_decoder(object):
         self.log_Z_idx = -1
         self.H_X, self.H_Z = self.H_matrices()
         self.loss_patts = self.get_loss_patterns()
-        print("Number of loss patterns: ", len(self.loss_patts))
         self.flag_check, self.strats = self.find_strategies()
         self.strategies_ordered = self.order_strats()
-        print("Number of strategies ordered: ", len(self.strategies_ordered))
 
     def H_matrices(self):
         # progenitor_gens = [self.gstate.stab_gens[idx].op for idx in range(len(self.gstate.stab_gens))]
@@ -300,8 +298,6 @@ class LT_Erasure_decoder(object):
         in_idxs = self.anticommuting_support_idxs(ref_H[-2], ref_H[-1])
         if len(in_idxs) > 1:
             ref_H, flag_f, stabs, l_x, l_z = self.tweak_logs(len(removed_rows), ref_H)
-            more_logs = self.tweak_more_logs(len(removed_rows), ref_H)
-            print("Number of valid strategies: ", len(more_logs))
         h_x, h_z = np.hsplit(ref_H, 2)
         log_Z_X = np.any(h_x[-1][:num_lost_qbts])
         log_Z_Z = np.any(h_z[-1][:num_lost_qbts])
@@ -1193,4 +1189,5 @@ if __name__ == '__main__':
     gstate = graph_from_nodes_and_edges(graph_nodes,
                                         graph_edges)
     # erasure_decoder = LT_Erasure_decoder(n_qbts, 3, gstate, in_qbt=in_qubit)
+
     erasure_decoder = LT_Erasure_decoder_All_Strats(n_qbts, 3, gstate, in_qbt=in_qubit)
