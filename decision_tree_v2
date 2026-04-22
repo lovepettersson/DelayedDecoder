@@ -2528,7 +2528,7 @@ if __name__ == '__main__':
     from CodeFunctions.graphs import *
     import matplotlib.pyplot as plt
     from ErasureDecoder import LT_Erasure_decoder, AllPossStrats
-    from HybridDelayedMeasDecoderFixedMeasPatt import *
+    from DecoderFixedMeasUpdated import *
 
     n_qbts = 7
     distance = 2
